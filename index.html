@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to bottom, #fbd1dc, #f8b6c8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: #ffd6e3;
+  padding: 40px 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 2;
+}
+
+.hearts-top {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+  color: #b5476d;
+  line-height: 1.3;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #8a3a57;
+  margin-bottom: 25px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
+}
+
+button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.yes-btn {
+  background: #e84c7f;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(232,76,127,0.5);
+}
+
+.no-btn {
+  background: #f3c2d1;
+  color: #8a3a57;
+  position: relative;
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  top: -30px;
+  font-size: 24px;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+  padding: 35px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 350px;
+  animation: pop 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.popup-content h2 {
+  font-family: 'Pacifico', cursive;
+  color: #b5476d;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 15px;
+  color: #7a2e4d;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="hearts-top">💗 💕 💖 💘</div>
+
+  <h1>
+    Srillu my kanna<br>
+    will you be my<br>
+    Valentine?
+  </h1>
+
+  <div class="subtitle">
+    I already know the answer, but I still want to hear it 🥺
+  </div>
+
+  <div class="buttons">
+    <button class="yes-btn" id="yesBtn">Yes ❤️</button>
+    <button class="no-btn" id="noBtn">No 💔</button>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>Yaaayyy 💖🥰</h2>
+    <p>
+      You just made my heart the happiest ever 💕<br>
+      Forever yours 😘💍💞
+    </p>
+  </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const popup = document.getElementById("popup");
+
+// YES click
+yesBtn.addEventListener("click", () => {
+  popup.style.display = "flex";
+
+  for (let i = 0; i < 50; i++) {
+    setTimeout(createHeart, i * 100);
+  }
+});
+
+// NO runs away
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+function moveNo() {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 150 - 75;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// Hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = ["❤️","💖","💗","💕","💘"][Math.floor(Math.random()*5)];
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (2 + Math.random()*3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}
+</script>
+
+</body>
+</html>
